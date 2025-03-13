@@ -42,9 +42,9 @@ variable "dns_servers" {
 variable "subnets" {
   type = map(object({
     address_prefix                                = string
-    private_endpoint_network_policies             = optional(string)
+    private_endpoint_network_policies             = optional(string, "")
     private_link_service_network_policies_enabled = optional(bool, false)
-    service_endpoints                             = optional(list(string))
+    service_endpoints                             = optional(list(string), [])
     delegation = optional(object({
       name = string
       service_delegation = object({
