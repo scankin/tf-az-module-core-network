@@ -7,7 +7,7 @@ locals {
   }
 
   name_suffix = join("-", [
-    location_shortcode[var.location],
+    local.location_shortcode[var.location],
     var.environment_code
   ])
 
@@ -21,6 +21,7 @@ locals {
   ############################
   resource_group_name = join("-", [
     var.service,
+    "vnet",
     "rg",
     local.name_suffix
   ])
