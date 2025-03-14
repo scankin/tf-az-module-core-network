@@ -5,5 +5,5 @@ output "virtual_network_id" {
 
 output "subnet_ids" {
   description = "Map output of subnet IDs created by the module."
-  value       = { for v in variables.subnets : v.key => { id = azurerm_subnet.azurerm_subnet.this[v.key].id } }
+  value       = zipmap([for k, v in var.subnets : k], [for k, v in var.subnets : azurerm_subnet.this[k].id])
 }
