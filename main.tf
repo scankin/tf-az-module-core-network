@@ -31,3 +31,18 @@ resource "azurerm_subnet" "this" {
     }
   }
 }
+
+resource "azurerm_network_security_group" "this" {
+  for_each = var.subnets
+
+  name                = join("-", ["nsg", each.key])
+  location            = var.location
+  resource_group_name = var.resource_group_name
+}
+
+resource "azuerm_subnet_network_security_group_association" "this" {
+  for_each = var.subnets
+
+  subnet_id                 = azurerm_subnet.this[each.key].id
+  network_security_group_id = azurerm_network_security_group.this[each.key].id
+}
