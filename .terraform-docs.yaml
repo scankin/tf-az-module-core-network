@@ -1,0 +1,21 @@
+formatter: "markdown table"
+
+content: |-
+  {{ .Header }}
+  ## Introduction
+  The following repository contains terraform code for a core networking module which provisions
+  
+  - A singe Virtual Network
+  - A number Subnets
+    - A single Network Security Group per subnet
+
+  This module is not for commercial use, and has purely been created for lab exercises and own use.
+
+  ## Example Deployment
+  The `example/` folder contains an example configuration for deploying this module. The variables for this deployment can be found within the `vars/` folder.
+
+  {{ .Providers }}
+
+  {{ .Outputs }}
+
+  {{ .Inputs }}  
