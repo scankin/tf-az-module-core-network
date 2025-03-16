@@ -23,10 +23,10 @@ resource "azurerm_subnet" "this" {
   dynamic "delegation" {
     for_each = each.value.delegation[*]
     content {
-      name = delegation.name
+      name = delegation.value.name
       service_delegation {
-        name    = delegation.service_delegation.name
-        actions = delegation.service_delegation.actions
+        name    = delegation.value.service_delegation.name
+        actions = delegation.value.service_delegation.actions
       }
     }
   }
