@@ -17,3 +17,5 @@ subnets = {
     private_link_service_network_policies_enabled = true
   }
 }
+
+dns_servers = ["10.0.0.0", "10.0.0.1/"]

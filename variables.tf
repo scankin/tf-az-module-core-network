@@ -12,12 +12,15 @@ variable "resource_group_name" {
 
 variable "location" {
   type        = string
-  description = "value"
+  description = "The value of the location for the Virtual Network to be deployed"
 }
 
 variable "tags" {
   type        = map(any)
-  description = "value"
+  description = "Map value of key:pair values indicating tags"
+  default = {
+    terraform = "true"
+  }
 }
 
 ## Virtual Network Variables
@@ -26,7 +29,7 @@ variable "address_space" {
   type = string
   validation {
     condition     = can(regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/[0-9]{1,2})$", var.address_space))
-    error_message = "VNet CIDR range is invalid."
+    error_message = "${var.address_space} is not a valid CIDR range."
   }
   description = "The CIDR range of the Virtual Network to be deployed."
 }
@@ -34,6 +37,12 @@ variable "address_space" {
 variable "dns_servers" {
   type        = list(string)
   description = "The IP addresses of the DNS servers for the Virtual Network."
+  validation {
+    condition = alltrue([
+      for v in var.dns_servers : can(regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}$", v))
+    ])
+    error_message = "Each value must be a valid IP address"
+  }
   default     = []
 }
 
@@ -53,6 +62,23 @@ variable "subnets" {
       })
     }), null)
   }))
+  validation {
+    condition = alltrue([
+      for k in var.subnets : can(regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/[0-9]{1,2})$", k.address_prefix))
+    ])
+    error_message = "Subnet address prefix must be a valid CIDR range."
+  }
+  validation {
+    condition = alltrue([
+      for k in var.subnets : contains([
+        "Disabled",
+        "Enabled",
+        "NetworkSecurityGroupEnabled",
+        "RouteTableEnabled"
+      ], k.private_endpoint_network_policies)
+    ])
+    error_message = "Private Endpoint Network Policies must be 'Disabled', 'Enabled', 'NetworkSecurityGroupEnabled or 'RouteTableEnabled'."
+  }
   description = <<DESC
     Map of objects containing the subnet configurations for the virtual network.
 

@@ -40,7 +40,7 @@ resource "azurerm_network_security_group" "this" {
   resource_group_name = var.resource_group_name
 }
 
-resource "azuerm_subnet_network_security_group_association" "this" {
+resource "azurerm_subnet_network_security_group_association" "this" {
   for_each = var.subnets
 
   subnet_id                 = azurerm_subnet.this[each.key].id
