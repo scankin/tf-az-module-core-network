@@ -1,16 +1,16 @@
 ## Common Variables
 ###########################
 variable "service" {
-  type        = string
+  type = string
   validation {
-    condition = can(regexall("^[a-z]{1,4}$", var.service))
+    condition     = can(regexall("^[a-z]{1,4}$", var.service))
     error_message = "Service must be a lower case letter and no longer than 3 characters"
   }
   description = "Service name for the configuration."
 }
 
 variable "location" {
-  type        = string
+  type = string
   validation {
     condition = contains([
       "uksouth",
@@ -22,7 +22,7 @@ variable "location" {
 }
 
 variable "environment_code" {
-  type        = string
+  type = string
   validation {
     condition = contains([
       "dev",

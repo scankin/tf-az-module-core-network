@@ -17,3 +17,8 @@ output "web_subnet_id" {
   description = "Web Subnet ID"
   value       = module.core_network.subnet_ids["web"]
 }
+
+output "nsg_ids" {
+  description = "The IDs of the Network Security Groups created by the module"
+  value       = module.core_network.nsg_ids
+}

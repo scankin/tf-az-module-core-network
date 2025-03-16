@@ -43,7 +43,7 @@ variable "dns_servers" {
     ])
     error_message = "Each value must be a valid IP address"
   }
-  default     = []
+  default = []
 }
 
 ## Subnet Variables
