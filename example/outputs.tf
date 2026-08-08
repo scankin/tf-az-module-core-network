@@ -8,16 +8,6 @@ output "subnet_ids" {
   value       = module.core_network.subnet_ids
 }
 
-output "private_endpoint_subnet_id" {
-  description = "Private Endpoint Subnet ID"
-  value       = module.core_network.subnet_ids["pe"]
-}
-
-output "web_subnet_id" {
-  description = "Web Subnet ID"
-  value       = module.core_network.subnet_ids["web"]
-}
-
 output "nsg_ids" {
   description = "The IDs of the Network Security Groups created by the module"
   value       = module.core_network.nsg_ids

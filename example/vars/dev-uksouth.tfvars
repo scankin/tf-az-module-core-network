@@ -21,8 +21,8 @@ subnets = {
   pe = {
     address_prefix                                = "10.0.0.32/29"
     private_link_service_network_policies_enabled = true
-  },
-
+    managed                                       = true
+  }
 }
 
 dns_servers = ["10.0.0.0", "10.0.0.1"]
