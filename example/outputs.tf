@@ -3,9 +3,9 @@ output "virtual_network_id" {
   value       = module.core_network.virtual_network_id
 }
 
-output "subnet_ids" {
+output "subnets" {
   description = "Map output of subnet IDs created by the module."
-  value       = module.core_network.subnet_ids
+  value       = module.core_network.subnets
 }
 
 output "nsgs" {

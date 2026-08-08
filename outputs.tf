@@ -3,9 +3,9 @@ output "virtual_network_id" {
   value       = azurerm_virtual_network.this.id
 }
 
-output "subnet_ids" {
+output "subnets" {
   description = "Zipmap output of subnet IDs created by the module."
-  value       = zipmap([for k, v in var.subnets : k], [for k, v in var.subnets : azurerm_subnet.this[k].id])
+  value       = azurerm_subnet.this
 }
 
 output "nsgs" {
