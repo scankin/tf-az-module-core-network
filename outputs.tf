@@ -8,7 +8,7 @@ output "subnet_ids" {
   value       = zipmap([for k, v in var.subnets : k], [for k, v in var.subnets : azurerm_subnet.this[k].id])
 }
 
-output "nsg_ids" {
-  description = "Zipmap output of Network Security Group IDs created by the module"
-  value       = zipmap([for k, v in var.subnets : k if (v.managed != true && !contains(local.managed_subnet_names, k))], [for k, v in var.subnets : azurerm_network_security_group.this[k].id if (v.managed != true && !contains(local.managed_subnet_names, k))])
+output "nsgs" {
+  description = "The network security groups created by the module."
+  value       = azurerm_network_security_group.this
 }

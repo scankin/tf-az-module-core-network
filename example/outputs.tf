@@ -8,7 +8,7 @@ output "subnet_ids" {
   value       = module.core_network.subnet_ids
 }
 
-output "nsg_ids" {
-  description = "The IDs of the Network Security Groups created by the module"
-  value       = module.core_network.nsg_ids
+output "nsgs" {
+  description = "A map containing the information of the NSGs deployed by the module"
+  value       = module.core_network.nsgs
 }
